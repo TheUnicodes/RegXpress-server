@@ -1,8 +1,19 @@
 const knex = require('./knex')
 
 module.exports = {
-  joinRoom: function(user){
-    return knex('player').insert(user)
+  joinRoom: function(info){
+    let user = info.username
+    return knex('player').insert({username: user}, 'id')
+    .then(function(result){
+      return knex('player_room').insert({player_id: result[0], room_id: info.room_id})
+    })
+  },
+
+  leaveRoom: function(id){
+    return knex('player_room').where('player_id', id).del()
+    .then(function(){
+      return knex('player').where('id', id).del()
+    })
   },
 
   getAllRooms: function(){
