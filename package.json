@@ -16,7 +16,8 @@
     "morgan": "~1.8.1",
     "nodemon": "^1.11.0",
     "pg": "^7.0.2",
-    "serve-favicon": "~2.4.2"
+    "serve-favicon": "~2.4.2",
+    "socket.io": "^2.0.3"
   },
   "description": "A real time contest between one or more players where the goal is to accumulate points by solving complex scenario based word pattern problems using regex. The user will be able to log in and keep track of their scores. Questions will be sorted by level of difficulty and generated randomly.",
   "main": "./bin/www",

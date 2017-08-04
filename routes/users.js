@@ -17,13 +17,7 @@ router.delete('/:id', function(req, res){
       message: "Leaving room..."
     })
   })
-})
-//login or join -> post to usertable and join with room
-//delete user from user table and from room.
-
-
-
-
+});
 
 
 module.exports = router;

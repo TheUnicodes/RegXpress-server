@@ -5,16 +5,19 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const users = require('./routes/users');
-const rooms = require('./routes/rooms')
-const questions = require('./routes/questions')
+const http = require('http');
 
+const users = require('./routes/users');
+const rooms = require('./routes/rooms');
+const questions = require('./routes/questions');
+const sockets = require('./sockets');
 const app = express();
 
+const server = http.createServer(app);
+const io = require('socket.io')(server);
 
+sockets(io);
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -40,4 +43,7 @@ app.use(function(err, req, res, next) {
   res.json({message: err.message, error:req.app.get('env') === 'development' ? err : {} });
 });
 
-module.exports = app;
+module.exports = {
+  app,
+  server
+}
