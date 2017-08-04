@@ -4,12 +4,13 @@ module.exports = function(io) {
   var roomNames = [];
 
   io.on('connection', function(socket) {
-    socket.on('on message', function(msg) {
-      var obj = msg;
-      console.log("room ", obj.room, " user", obj.user);
+
+
+    socket.on('on message', function(_info) {
+      var obj = _info;
+      console.log("user", obj.user);
       // io.to(obj.room).emit('on message', obj.msg);
-      obj.id = socket.id;
-      io.to(obj.room).emit('on message', obj.msg);
+      io.to(obj.room).emit('on message', obj);
     });
 
 
@@ -23,6 +24,8 @@ module.exports = function(io) {
       console.log("Users joined the room ", users);
       socket.join(obj.room.name);
       users.push(obj.user);
+
+      obj.socketId = socket.id;
 
       var indexOfRoomName = roomNames.indexOf(obj.room.name);
 
