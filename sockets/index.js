@@ -36,7 +36,11 @@ module.exports = function(io) {
 
     socket.on("start game", function(numPlayers) {
       // socket.broadcast.emit("start game", numPlayers);
-      io.to("room1").emit("start game", numPlayers);
+      // io.to("room1").emit("start game", numPlayers);
+      console.log("The game should start", numPlayers , "players joined");
+      // socket.emit.to("Coders").emit('start game', numPlayers);
+      io.to("Coders").emit('start game', numPlayers);
+
 
     });
 
