@@ -9,23 +9,42 @@ module.exports = function(io) {
     socket.on('on message', function(_info) {
       var obj = _info;
       console.log("user", obj.user);
+      console.log("Message ", obj.msg)
+      // io.emit("on message", obj)
+      socket.broadcast.emit("on message", obj);
+
       // io.to(obj.room).emit('on message', obj.msg);
-      io.to(obj.room).emit('on message', obj);
+      // io.to(obj.room).emit('on message', obj);
     });
 
+    socket.on("close server", function() {
+      io.httpServer.close();
+      console.log("Socket closed");
+    });
 
     socket.on('disconnect', function(data) {
       console.log('Client disconnected:', socket.id);
+    });
+
+    socket.on("start game", function(numPlayers) {
+      // socket.broadcast.emit("start game", numPlayers);
+      io.to("room1").emit("start game", numPlayers);
+
     });
 
     socket.on('room', function(info) {
       var obj = info;
       console.log("Joining room ->", obj.room);
       console.log("Users joined the room ", users);
+
       socket.join(obj.room.name);
       users.push(obj.user);
 
-      obj.socketId = socket.id;
+      obj.room.socketId = socket.id;
+
+      obj.room.numPlayersJoined ++;
+
+      console.log("Num players joined", obj.room.numPlayersJoined);
 
       var indexOfRoomName = roomNames.indexOf(obj.room.name);
 
@@ -49,6 +68,8 @@ module.exports = function(io) {
       }
 
       io.to(obj.room.name).emit('room', obj);
+      // socket.broadcast.emit("room", obj);
+
 
     });
 
