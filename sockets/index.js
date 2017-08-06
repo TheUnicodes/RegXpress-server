@@ -34,12 +34,14 @@ module.exports = function(io) {
       console.log('Client disconnected:', socket.id);
     });
 
-    socket.on("start game", function(numPlayers) {
+    socket.on("start game", function(gameInfo) {
       // socket.broadcast.emit("start game", numPlayers);
       // io.to("room1").emit("start game", numPlayers);
-      console.log("The game should start", numPlayers , "players joined");
+      console.log("The game should start", gameInfo.numPlayers , "players joined");
+      console.log("The game room ", gameInfo.room);
+
       // socket.emit.to("Coders").emit('start game', numPlayers);
-      io.to("Coders").emit('start game', numPlayers);
+      io.to("Coders").emit('start game', gameInfo);
 
 
     });
