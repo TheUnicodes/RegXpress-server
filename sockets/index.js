@@ -11,7 +11,15 @@ module.exports = function(io) {
       console.log("user", obj.user);
       console.log("Message ", obj.msg)
       // io.emit("on message", obj)
-      socket.broadcast.emit("on message", obj);
+
+
+
+
+
+      // socket.broadcast.emit("on message", obj);
+      socket.broadcast.to(obj.room).emit('on message', obj);
+
+
 
       // io.to(obj.room).emit('on message', obj.msg);
       // io.to(obj.room).emit('on message', obj);
