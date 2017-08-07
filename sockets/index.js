@@ -131,6 +131,9 @@ module.exports = function(io) {
 
       io.to(obj.room.name).emit('room', obj);
 
+      // socket.broadcast.to(obj.room.name).emit('room', obj);
+
+
 
       // socket.broadcast.to(obj.room.name).emit('room', obj);
 
