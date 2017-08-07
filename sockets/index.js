@@ -2,6 +2,7 @@ module.exports = function(io) {
   var users = [];
   var rooms = [];
   var roomNames = [];
+  var timerCount = 5000;
 
   io.on('connection', function(socket) {
 
@@ -41,8 +42,21 @@ module.exports = function(io) {
       console.log("The game room ", gameInfo.room);
 
       // socket.emit.to("Coders").emit('start game', numPlayers);
-      io.to("Coders").emit('start game', gameInfo);
 
+
+      var timer = setInterval(function() {
+        // io.to("Coders").emit('start game', gameInfo);
+        timerCount -= 100;
+        if(timerCount % 1000 == 0) {
+          console.log("Time to start ", timerCount);
+          io.to("Coders").emit("count down", timerCount)
+        }
+        if(timerCount <= 0) {
+          io.to("Coders").emit('start game', gameInfo);
+          // timer.clearInterval();
+          clearInterval(timer);
+        }
+      }, 1000)
 
     });
 
