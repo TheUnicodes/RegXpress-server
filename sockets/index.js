@@ -79,8 +79,13 @@ module.exports = function(io) {
       console.log("User ", _messageInfo.username, " passed the test");
       // io.to(_messageInfo.room).emit('user pass', _messageInfo);
       socket.broadcast.to(_messageInfo.room).emit("user pass", _messageInfo);
+    });
 
-
+    socket.on("user win", function(_info) {
+      // console.log("user passed on room ", _info.room);
+      console.log("User ", _info.username, " won");
+      // io.to(_messageInfo.room).emit('user pass', _messageInfo);
+      socket.broadcast.to(_info.room).emit("user win", _info);
     });
 
     socket.on('room', function(info) {
