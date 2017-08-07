@@ -49,11 +49,12 @@ module.exports = function(io) {
         timerCount -= 100;
         if(timerCount % 1000 == 0) {
           console.log("Time to start ", timerCount);
-          io.to("Coders").emit("count down", timerCount)
+          io.to(gameInfo.room.name).emit("count down", timerCount)
         }
         if(timerCount <= 0) {
-          io.to("Coders").emit('start game', gameInfo);
+          io.to(gameInfo.room.name).emit('start game', gameInfo);
           // timer.clearInterval();
+          timerCount = 5000;
           clearInterval(timer);
         }
       }, 1000)
