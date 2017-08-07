@@ -67,6 +67,10 @@ module.exports = function(io) {
 
     });
 
+    socket.on("user pass", function(_messageInfo) {
+      console.log("User ", _messageInfo.username, " passed the test");
+    });
+
     socket.on('room', function(info) {
       var obj = info;
 
@@ -114,6 +118,10 @@ module.exports = function(io) {
       }
 
       io.to(obj.room.name).emit('room', obj);
+
+
+      // socket.broadcast.to(obj.room.name).emit('room', obj);
+
 
     } else {
       console.log("The room is full ", obj.room.name);
