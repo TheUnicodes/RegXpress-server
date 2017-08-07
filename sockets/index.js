@@ -40,6 +40,13 @@ module.exports = function(io) {
       console.log('Client disconnected:', socket.id);
     });
 
+    socket.on("get updates", function(roomsInfo) {
+      let _info = {
+        rooms: rooms
+      }
+      io.emit("get updates", _info)
+    });
+
     socket.on("start game", function(gameInfo) {
       // socket.broadcast.emit("start game", numPlayers);
       // io.to("room1").emit("start game", numPlayers);
