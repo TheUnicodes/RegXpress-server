@@ -2,7 +2,12 @@ module.exports = function(io) {
   var users = [];
   var rooms = [];
   var roomNames = [];
-  var timerCount = 5000;
+  var timerCount = 2000;
+
+
+  var roomsAsObjects = {
+
+  }
 
   io.on('connection', function(socket) {
 
@@ -54,8 +59,9 @@ module.exports = function(io) {
         if(timerCount <= 0) {
           io.to(gameInfo.room.name).emit('start game', gameInfo);
           // timer.clearInterval();
-          timerCount = 5000;
           clearInterval(timer);
+          // timerCount = 5000;
+
         }
       }, 1000)
 
@@ -63,8 +69,19 @@ module.exports = function(io) {
 
     socket.on('room', function(info) {
       var obj = info;
+
+
+      var room = getRoom(obj.room.name);
+
+      if(room) {
+        obj.room = room;
+      }
+
+      if(obj.room.users.length - 1 < info.room.max_numplayers) {
       console.log("Joining room ->", obj.room);
       console.log("Users joined the room ", users);
+
+      // console.log("Users array length ", obj.room.users.length);
 
       socket.join(obj.room.name);
       users.push(obj.user);
@@ -97,12 +114,30 @@ module.exports = function(io) {
       }
 
       io.to(obj.room.name).emit('room', obj);
+
+    } else {
+      console.log("The room is full ", obj.room.name);
+      io.to(obj.room.name).emit("error room", obj);
+    }
       // socket.broadcast.emit("room", obj);
 
 
     });
 
+
+
   });
+
+
+  function getRoom(_name) {
+    for (var i = 0; i < rooms.length; i++) {
+      if(rooms[i].name == _name) {
+        return rooms[i];
+        break;
+      }
+    }
+
+  }
 
 
 }
