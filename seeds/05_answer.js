@@ -8,7 +8,7 @@ exports.seed = function(knex, Promise) {
         {content: '[e]+m{2}', question_id: 3},
         {content: '(leftleftleft(downx)*)*', question_id: 4},
         {content: '(fire)[]+(gas)', question_id: 5},
-        {content: '[w,m,v,t,m]an', question_id: 6}
+        {content: '[w,m,v,t]an', question_id: 6}
       ]);
     });
 };
