@@ -64,6 +64,7 @@ module.exports = function(io) {
       console.log("The game room ", gameInfo.room);
 
       var timer = setInterval(function() {
+        
         io.to(gameInfo.room.name).emit("count down", timerCount)
 
         console.log("Time to start ", timerCount);
@@ -142,10 +143,14 @@ module.exports = function(io) {
         }
 
         io.to(obj.room.name).emit('room', obj);
+        // socket.broadcast.to(obj.room.name).emit('room', obj);
+
 
       } else {
         console.log("The room is full ", obj.room.name);
         io.to(obj.room.name).emit("error room", obj);
+        // socket.broadcast.emit("room", obj);
+
       }
       // socket.broadcast.emit("room", obj);
     });
