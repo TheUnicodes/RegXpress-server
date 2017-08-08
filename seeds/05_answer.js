@@ -10,7 +10,7 @@ exports.seed = function(knex, Promise) {
         {content: 'fire[ ]+gas', question_id: 5},
         {content: '[w,m,v,t]an', question_id: 6},
         {content: 'Once[ ]+upon[ ]+a[ ]+time[ ]+', question_id: 7},
-        {content: 'var[ ]+[a-z][ ]*:[ ]*integer[ ]*=[ ]*[0-9]{1,5}[]*;'}
+        {content: 'var[ ]+[a-z][ ]*:[ ]*integer[ ]*=[ ]*[0-9]{1,5}[]*;', question_id: 8}
       ]);
     });
 };
