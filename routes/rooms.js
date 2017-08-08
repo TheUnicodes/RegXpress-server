@@ -15,5 +15,11 @@ router.get('/:id', function(req, res) {
   })
 });
 
+router.post('/', function(req, res){
+  queries.createRoom(req.body).then(rooms=>{
+    res.send(rooms[0])
+  })
+})
+
 
 module.exports = router;

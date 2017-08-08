@@ -24,6 +24,10 @@ module.exports = {
     return knex('room').where('id', id).first();
   },
 
+  createRoom: function(room){
+    return knex('room').insert(room).returning('*');
+  },
+
   getQuestions: function(){
     return knex('question')
     .join('answer', 'question_id', 'question.id')
