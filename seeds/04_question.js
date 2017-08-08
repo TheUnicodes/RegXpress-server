@@ -3,9 +3,12 @@ exports.seed = function(knex, Promise) {
   return knex.raw('TRUNCATE question RESTART IDENTITY CASCADE;')
     .then(function () {
       return knex('question').insert([
-      {content: 'There is a room...', difficulty: 'easy'},
-      {content: 'In the movie the Matrix...', difficulty: 'medium'},
-      {content: 'Deep in the ocean...', difficulty: 'hard'}
+      {content: 'Gandalf can\'t start his day without saying \'luka\' exactly two times.  Please write a regular expression to describe this pattern.', difficulty: 'easy'},
+      {content: 'Some paineter wants to mimic Picassp\'s square painting style... He can draw a squre by using directions (left, right, up, down), but with one length value, or else it won\'t be a squre. Write a regex for this pattern.  Note: Start from the top-left. Every time he draws toward a direction the pen will be moving 1cm.  Suppose that: left = l, right = r, up = u, down = d, length of each side = 2cm', difficulty: 'medium'},
+      {content: 'Rocky Balboa should start his day by eating at least one egg, then drinks exactly 2 cups of milk.  Write a regular expression that describes this pattern.  Suppose that:  egg = e, milk = m', difficulty: 'hard'},
+      {content: 'A game developer wants to create a cheat-code in his game, to create infinite coins. He is thinking of doing so by typing the following buttons repeatedly: left, left, left (down and x). Note that (down and x) are optional and if used will make the coin value multiplied by 4. Note: this cheat is optional, because not everyone has access to it.'},
+      {content: 'There should be at least one space distance between fire and gas'},
+      {content: 'The wizard Zoola can fool is folk by saying wan, or man, or van, or tan, or man.'}
       ]);
     });
 };
