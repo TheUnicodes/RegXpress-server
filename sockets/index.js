@@ -64,7 +64,7 @@ module.exports = function(io) {
       console.log("The game room ", gameInfo.room);
 
       var timer = setInterval(function() {
-        
+
         io.to(gameInfo.room.name).emit("count down", timerCount)
 
         console.log("Time to start ", timerCount);
@@ -106,7 +106,7 @@ module.exports = function(io) {
         obj.room = room;
       }
 
-      if (obj.room.users.length - 1 < info.room.max_numplayers) {
+      if (obj.room.users.length < info.room.max_numplayers) {
         console.log("Joining room ->", obj.room);
         console.log("Users joined the room ", users);
 
